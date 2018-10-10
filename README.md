@@ -18,3 +18,4 @@ ARGUS TV PVR client addon for [Kodi] (http://kodi.tv)
 
 * [Kodi's PVR user support] (http://forum.kodi.tv/forumdisplay.php?fid=167)
 * [Kodi's PVR development support] (http://forum.kodi.tv/forumdisplay.php?fid=136)
+
