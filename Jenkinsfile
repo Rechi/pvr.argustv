@@ -17,6 +17,10 @@ def buildPlugin(Map params = [:])
 		'Leia': 'leia'
 	]
 
+	triggers {
+		cron(env.BRANCH_NAME == 'master' ? 'H/10 * * * *' : '')
+  }
+
 	def platforms = params.containsKey('platforms') && params.platforms.metaClass.respondsTo('each') && params.platforms.every{ p -> p in PLATFORMS_VALID } ? params.platforms : PLATFORMS_VALID.keySet()
 	def version = params.containsKey('version') && params.version in VERSIONS_VALID ? params.version : VERSIONS_VALID.keySet()[0]
 	def addon = env.JOB_NAME.tokenize('/')[1]
