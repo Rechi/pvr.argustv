@@ -276,13 +276,14 @@ def buildPlugin(Map addonParams = [:])
 
 						stage("deploy ${platform}")
 						{
-							if (true || params.force_ppa_upload)
+							if (true)
 							{
 								def force = params.force_ppa_upload ? '-f' : ''
-								def changespattern = 'kodi-' + addon.replace('.', '-') + "_${packageversion}-${params.TAGREV}*_source.changes"
+								def changespattern = 'kodi-' + addon.replace('.', '-') + "_${packageversion}-${params.TAGREV}~{${dists.join(',')}}_source.changes"
 								for (ppa in ppas)
 								{
 									echo "Uploading ${changespattern} to ${ppa}"
+									sh "echo dput ${force} ${ppa} ${changespattern}"
 								}
 							}
 						}
@@ -338,4 +339,4 @@ def getVersion(text)
 	matcher ? matcher.getAt(1)[1] : null
 }
 
-buildPlugin(version: "Matrix")
+buildPlugin(version: "Matrix", platforms: ["ubuntu-ppa"])
