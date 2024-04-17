@@ -162,7 +162,7 @@ def buildPlugin(Map addonParams = [:])
 									env.ADDONS_DEFINITION_DIR = pwd().replace('\\', '/') + '/tools/depends/target/binary-addons/addons'
 									env.ADDON_SRC_PREFIX = pwd().replace('\\', '/') + '/tools/depends/target/binary-addons'
 									folder = PLATFORMS_VALID[platform]
-									bat "tools/buildsteps/${folder}/make-addons.bat package ${addon}"
+									bat "set _MSPDBSRV_ENDPOINT_=${platform}-${version} && call tools/buildsteps/${folder}/make-addons.bat package ${addon}"
 								}
 
 								if (fileExists("cmake/addons/.success"))
@@ -238,4 +238,4 @@ def extendedChoice(name, choices, defaultchoice, desc)
 	)
 }
 
-buildPlugin(version: "Omega")
+buildPlugin(version: "Omega", platforms: ["windows-i686", "windows-x86_64"])
